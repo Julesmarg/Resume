@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juliet Margulies - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <style>
+        /* Swiss Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .header {
+            margin-bottom: 4rem;
+        }
+
+        .name {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        /* Box Styles */
+        .box {
+            border: 2px solid #000;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #000;
+        }
+
+        /* Navigation */
+        nav {
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Contact Info */
+        .contact {
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills List */
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .skills-list li::before {
+            content: '›';
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .name {
+                font-size: 3rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="name">JULIET<br>MARGULIES</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="grid">
+            <div class="box" id="about">
+                <h2>ABOUT ME</h2>
+                <p>Having graduated from the University of Pittsburgh with a degree in Film & Media studies, 
+                I felt instantly drawn to all things visual. Now I am pursuing my master in Strategic 
+                Communication Design at the University of Colorado, Boulder.</p>
+            </div>
+            <div class="box contact" id="contact">
+                <h2>CONTACT</h2>
+                <p>610-952-2694</p>
+                <p>julietmargulies@gmail.com</p>
+                <p>julietmargulies.com</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="portfolio">
+        <h2>PORTFOLIO</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="/api/placeholder/400/400" alt="Brand Design Project">
+                <div class="portfolio-overlay">
+                    <h3>Brand Identity</h3>
+                    <p>Complete brand identity design for local startup</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="/api/placeholder/400/400" alt="Package Design">
+                <div class="portfolio-overlay">
+                    <h3>Package Design</h3>
+                    <p>Product packaging for sustainable goods</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="/api/placeholder/400/400" alt="Social Media Campaign">
+                <div class="portfolio-overlay">
+                    <h3>Social Campaign</h3>
+                    <p>Integrated social media campaign design</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="/api/placeholder/400/400" alt="Logo Design">
+                <div class="portfolio-overlay">
+                    <h3>Logo Collection</h3>
+                    <p>Series of logo designs for various clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="grid">
+        <div>
+            <section id="experience">
+                <div class="box">
+                    <h2>EXPERIENCE</h2>
+                    <h3>Marketing Lead</h3>
+                    <p>Social Media/Copywriting</p>
+                    <p>
+                        Managed and created content for start up company, generated leads 
+                        and networked with potential clients.
+                    </p>
+                    <p>
+                        DESIGNED AND MANAGED SOCIAL MEDIA CHANNELS AND TRACKED SEO. 
+                        BECAME PROFICIENT IN CURATING EMAIL CAMPAIGNS. GAINED AN EYE 
+                        FOR BOTH DIGITAL DESIGN AND ADVERTISING LANGUAGE.
+                    </p>
+                    <div class="dates">
+                        <p>SEPT 18 - AUG 22</p>
+                        <p>APR 24 - PRESENT</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="box">
+                    <h2>EDUCATION</h2>
+                    <div>
+                        <h3>University of Pittsburgh '23</h3>
+                        <p>BA Film & Media</p>
+                        <p>GPA 3.6</p>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <h3>CU Boulder '25</h3>
+                        <p>MA Strategic Communication Design</p>
+                        <p>GPA 3.8</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div>
+            <section>
+                <div class="box">
+                    <h2>SOFTWARE & SKILLS</h2>
+                    <ul class="skills-list">
+                        <li>Adobe Illustrator</li>
+                        <li>Adobe Photoshop</li>
+                        <li>Canva</li>
+                        <li>Spline</li>
+                        <li>Brand Design</li>
+                        <li>Logo Design</li>
+                        <li>Packaging Design</li>
+                        <li>Teamwork</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Portfolio item click handler
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const title = this.querySelector('h3').textContent;
+                const description = this.querySelector('p').textContent;
+                const imgSrc = this.querySelector('img').src;
+                
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'block';
+                
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <button class="close-modal">&times;</button>
+                        <h2>${title}</h2>
+                        <img src="${imgSrc}" alt="${title}" style="width: 100%; margin: 1rem 0;">
+                        <p>${description}</p>
+                        <p>Additional project details and description would go here...</p>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                modal.querySelector('.close-modal').addEventListener('click', () => {
+                    modal.remove();
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
